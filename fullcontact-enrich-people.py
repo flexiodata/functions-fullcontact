@@ -88,7 +88,6 @@ def flexio_handler(flex):
         content = response.json()
 
         # map this function's property names to the API's property names
-        properties = [p.lower().strip() for p in input['properties']]
         property_map = {
             'full_name': content.get('fullName', ''),
             'age_range': content.get('ageRange', ''),
@@ -103,12 +102,9 @@ def flexio_handler(flex):
             'avatar_url': content.get('avatar', '')
         }
 
-        # map this function's property names to the API's property names
-        properties_iter = map(lambda prop : property_map.get(prop, ''), property_map.keys())
-        properties_list = list(properties_iter)
-
         # limit the results to the requested properties
-        result = [properties_list]
+        properties = [property_map.get(p.lower().strip(), '') for p in input['properties']]
+        result = [properties]
 
         # return the results
         result = json.dumps(result, default=to_string)
