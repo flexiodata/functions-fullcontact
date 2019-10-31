@@ -14,7 +14,7 @@
 #     description: The properties to return (defaults to 'full_name'). See "Notes" for a listing of the available properties.
 #     required: false
 # examples:
-#   - '"tcook@apple.com"
+#   - '"tcook@apple.com"'
 # notes: |
 #   The following properties are allowed:
 #     * `full_name`: the full name of the person
