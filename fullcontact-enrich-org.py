@@ -1,6 +1,6 @@
 
 # ---
-# name: fullcontact-enrich-people
+# name: fullcontact-enrich-org
 # deployed: true
 # title: FullContact People Enrichment
 # description: Return information about an organization by supplying the domain name
