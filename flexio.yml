@@ -5,6 +5,7 @@ image:
   alt: FullContact logo
 functions:
   - path: fullcontact-enrich-people.py
+  - path: fullcontact-enrich-org.py
 prompts:
   - element: form
     name: form_api_key
