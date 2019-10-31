@@ -11,7 +11,7 @@
 #     required: true
 #   - name: properties
 #     type: array
-#     description: The properties to return (defaults to 'full_name'). See "Notes" for a listing of the available properties.
+#     description: The properties to return (defaults to 'name'). See "Notes" for a listing of the available properties.
 #     required: false
 # examples:
 #   - '"apple.com"'
@@ -62,7 +62,7 @@ def flexio_handler(flex):
     # based on the positions of the keys/values
     params = OrderedDict()
     params['domain'] = {'required': True, 'type': 'string'}
-    params['properties'] = {'required': False, 'validator': validator_list, 'coerce': to_list, 'default': 'full_name'}
+    params['properties'] = {'required': False, 'validator': validator_list, 'coerce': to_list, 'default': 'name'}
     input = dict(zip(params.keys(), input))
 
     # validate the mapped input against the validator
