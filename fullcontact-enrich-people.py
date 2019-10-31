@@ -3,7 +3,7 @@
 # name: fullcontact-enrich-people
 # deployed: true
 # title: FullContact People Enrichment
-# description: Return person profile information based on email address.
+# description: Return a person's profile information based on their email address.
 # params:
 #   - name: email
 #     type: string

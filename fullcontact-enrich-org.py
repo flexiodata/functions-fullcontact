@@ -3,7 +3,7 @@
 # name: fullcontact-enrich-org
 # deployed: true
 # title: FullContact People Enrichment
-# description: Return information about an organization by supplying the domain name
+# description: Return information about an organization based on domain name.
 # params:
 #   - name: domain
 #     type: string
