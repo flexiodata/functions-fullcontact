@@ -7,7 +7,7 @@
 # params:
 #   - name: domain
 #     type: string
-#     description: The domain name from which you to retrieve information. For example, "apple.com".
+#     description: The domain name of the organization from which you want to retrieve information. For example, "apple.com".
 #     required: true
 #   - name: properties
 #     type: array

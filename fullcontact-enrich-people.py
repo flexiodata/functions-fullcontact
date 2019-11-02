@@ -15,6 +15,7 @@
 #     required: false
 # examples:
 #   - '"tcook@apple.com"'
+#   - '"bill.gates@microsoft.com"'
 #   - '"jeff@amazon.com", "full_name, title, bio"'
 # notes: |
 #   The following properties are allowed:
