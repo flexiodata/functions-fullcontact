@@ -19,7 +19,7 @@
 #   - '"fullcontact.com", "website, logo, founded, employees"'
 # notes: |
 #   The following properties are allowed:
-#     * `name`: the name of the organization
+#     * `name`: the name of the organization (default)
 #     * `location`: the location or address of the organization
 #     * `twitter_url`: URL of the organization's Twitter profile
 #     * `linkedin_url`: URL of the organization's LinkedIn profile

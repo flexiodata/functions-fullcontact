@@ -19,7 +19,7 @@
 #   - '"jeff@amazon.com", "full_name, title, bio"'
 # notes: |
 #   The following properties are allowed:
-#     * `full_name`: the full name of the person
+#     * `full_name`: the full name of the person (default)
 #     * `age_range`: age range of the person
 #     * `gender`: gender of the person
 #     * `location`: location of the person (varies depending on data quality)
