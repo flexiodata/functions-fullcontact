@@ -1,6 +1,11 @@
-# FullContact Spreadsheet Functions
+# FullContact Google Sheets & Excel Spreadsheet Add on
 
-FullContact Spreadsheet Functions enable you to enrich your spreadsheets with information about people and companies from [FullContact](https://www.fullcontact.com).
+FullContact helps you find and verify professional profile information. This FullContact spreadsheet integration for Google Sheets and Microsoft Excel enables you to import contact information from Hunter. This add-on will enable you to integrate on-demand, refreshable identify data without leaving your spreadsheet.
+
+For example, with this Excel and Google Sheets add-on you can:
+
+* Enrich person contact information based on email address, including name, age, gender, location, organization and social media handles including Twitter, Facebook, and LinkedIn.
+* Enrich company domain information, including name, location, Twitter and LinkedIn URLs, website, number of employees and category.
 
 Here are some examples:
 
