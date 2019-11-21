@@ -1,4 +1,4 @@
-# FullContact Spreadsheet Functions
+# FullContact Google Sheets and Excel Spreadsheet Add on
 
 FullContact helps you find and verify professional profile information. This FullContact spreadsheet integration for Google Sheets and Microsoft Excel enables you to import contact information from Hunter. This add-on will enable you to integrate on-demand, refreshable identify data without leaving your spreadsheet.
 
