@@ -2,7 +2,7 @@
 # ---
 # name: fullcontact-enrich-org
 # deployed: true
-# title: FullContact People Enrichment
+# title: FullContact Organization Enrichment
 # description: Return information about an organization based on domain name.
 # params:
 #   - name: domain
@@ -75,7 +75,7 @@ def flexio_handler(flex):
     try:
 
         # see here for more info:
-        # https://docs.fullcontact.com/#person-enrichment
+        # https://docs.fullcontact.com/#company-enrichment
         data = json.dumps({
             'domain': input['domain']
         })
