@@ -74,8 +74,6 @@ def flexio_handler(flex):
 
     # map this function's property names to the API's property names
     property_map = OrderedDict()
-
-    # primary properties from first api call
     property_map['name'] = 'name'
     property_map['location'] = 'location'
     property_map['twitter_url'] = 'twitter'
