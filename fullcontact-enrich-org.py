@@ -11,7 +11,7 @@
 #     required: true
 #   - name: properties
 #     type: array
-#     description: The properties to return (defaults to 'name'). See "Notes" for a listing of the available properties.
+#     description: The properties to return (defaults to all properties). See "Notes" for a listing of the available properties.
 #     required: false
 # examples:
 #   - '"apple.com"'
@@ -62,7 +62,7 @@ def flexio_handler(flex):
     # based on the positions of the keys/values
     params = OrderedDict()
     params['domain'] = {'required': True, 'type': 'string'}
-    params['properties'] = {'required': False, 'validator': validator_list, 'coerce': to_list, 'default': 'name'}
+    params['properties'] = {'required': False, 'validator': validator_list, 'coerce': to_list, 'default': '*'}
     input = dict(zip(params.keys(), input))
 
     # validate the mapped input against the validator
@@ -72,12 +72,36 @@ def flexio_handler(flex):
     if input is None:
         raise ValueError
 
+    # map this function's property names to the API's property names
+    property_map = OrderedDict()
+
+    # primary properties from first api call
+    property_map['name'] = 'name'
+    property_map['location'] = 'location'
+    property_map['twitter_url'] = 'twitter'
+    property_map['linkedin_url'] = 'linkedin'
+    property_map['bio'] = 'bio'
+    property_map['logo'] = 'logo'
+    property_map['website'] = 'website'
+    property_map['founded'] = 'founded'
+    property_map['employees'] = 'employees'
+    property_map['locale'] = 'locale'
+    property_map['category'] = 'category'
+
+    # get the properties to return and the property map
+    properties = [p.lower().strip() for p in input['properties']]
+
+    # if we have a wildcard, get all the properties
+    if len(properties) == 1 and properties[0] == '*':
+        properties = list(property_map.keys())
+
     try:
 
         # see here for more info:
         # https://docs.fullcontact.com/#company-enrichment
+
         data = json.dumps({
-            'domain': input['domain']
+            'domain': input['domain'].lower().strip()
         })
         headers = {
             'Content-Type': 'application/json',
@@ -87,25 +111,11 @@ def flexio_handler(flex):
 
         # get the response data as a JSON object
         response = requests.post(url, data=data, headers=headers)
+        response.raise_for_status()
         content = response.json()
 
-        # map this function's property names to the API's property names
-        property_map = {
-            'name': content.get('name', ''),
-            'location': content.get('location', ''),
-            'twitter_url': content.get('twitter', ''),
-            'linkedin_url': content.get('linkedin', ''),
-            'bio': content.get('bio', ''),
-            'logo': content.get('logo', ''),
-            'website': content.get('website', ''),
-            'founded': content.get('founded', ''),
-            'employees': content.get('employees', ''),
-            'locale': content.get('locale', ''),
-            'category': content.get('category', '')
-        }
-
         # limit the results to the requested properties
-        properties = [property_map.get(p.lower().strip(), '') for p in input['properties']]
+        properties = [content.get(property_map.get(p,''),'') or '' for p in properties]
         result = [properties]
 
         # return the results
@@ -114,7 +124,8 @@ def flexio_handler(flex):
         flex.output.write(result)
 
     except:
-        raise RuntimeError
+        flex.output.content_type = 'application/json'
+        flex.output.write([['']])
 
 def validator_list(field, value, error):
     if isinstance(value, str):
