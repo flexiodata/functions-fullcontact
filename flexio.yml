@@ -6,6 +6,7 @@ image:
 functions:
   - path: fullcontact-enrich-people.py
   - path: fullcontact-enrich-org.py
+  - path: fullcontact-find-person.py
 prompts:
   - element: form
     name: form_api_key
