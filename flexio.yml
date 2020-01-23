@@ -1,7 +1,7 @@
 title: FullContact Integration
 description: Functions for accessing your FullContact info
 image:
-  src: https://static.flex.io/assets/logos/icon-fullcontact-128.png
+  src: https://static.flex.io/assets/logos2/fullcontact.png
   alt: FullContact logo
 functions:
   - path: fullcontact-enrich-people.py
