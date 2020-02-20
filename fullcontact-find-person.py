@@ -15,25 +15,46 @@
 #     required: true
 #   - name: properties
 #     type: array
-#     description: The properties to return (defaults to all properties). See "Notes" for a listing of the available properties.
+#     description: The properties to return (defaults to all properties). See "Returns" for a listing of the available properties.
 #     required: false
+# returns:
+#   - name: full_name
+#     type: string
+#     description: The full name of the person (default)
+#   - name: age_range
+#     type: string
+#     description: The age range of the person
+#   - name: gender
+#     type: string
+#     description: The gender of the person
+#   - name: location
+#     type: string
+#     description: The location of the person (varies depending on data quality)
+#   - name: title
+#     type: string
+#     description: The current or most recent job title of the person
+#   - name: organization
+#     type: string
+#     description: The current or most recent place of work of the person
+#   - name: twitter_url
+#     type: string
+#     description: The URL of the person's Twitter profile
+#   - name: facebook_url
+#     type: string
+#     description: The URL of the person's Facebook profile
+#   - name: linkedin_url
+#     type: string
+#     description: The URL of the person's LinkedIn profile
+#   - name: bio
+#     type: string
+#     description: A biography of the person
+#   - name: avatar_url
+#     type: string
+#     description: The URL of the person's photo
 # examples:
 #   - '"tcook@apple.com"'
 #   - '"bill.gates@microsoft.com"'
 #   - '"jeff@amazon.com", "full_name, title, bio"'
-# notes: |
-#   The following properties are allowed:
-#     * `full_name`: the full name of the person (default)
-#     * `age_range`: age range of the person
-#     * `gender`: gender of the person
-#     * `location`: location of the person (varies depending on data quality)
-#     * `title`: current or most recent job title of the person
-#     * `organization`: current or most recent place of work of the person
-#     * `twitter_url`: URL of the person's Twitter profile
-#     * `facebook_url`: URL of the person's Facebook profile
-#     * `linkedin_url`: URL of the person's LinkedIn profile
-#     * `bio`: biography of the person
-#     * `avatar_url`: URL of the person's photo
 # ---
 
 import json

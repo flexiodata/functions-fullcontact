@@ -11,25 +11,46 @@
 #     required: true
 #   - name: properties
 #     type: array
-#     description: The properties to return (defaults to all properties). See "Notes" for a listing of the available properties.
+#     description: The properties to return (defaults to all properties). See "Returns" for a listing of the available properties.
 #     required: false
+# returns:
+#   - name: name
+#     type: string
+#     description: The name of the organization (default)
+#   - name: location
+#     type: string
+#     description: The location or address of the organization
+#   - name: twitter_url
+#     type: string
+#     description: The URL of the organization's Twitter profile
+#   - name: linkedin_url
+#     type: string
+#     description: The URL of the organization's LinkedIn profile
+#   - name: bio
+#     type: string
+#     description: A biography of the organization
+#   - name: logo
+#     type: string
+#     description: The URL of the organization's logo
+#   - name: website
+#     type: string
+#     description: The URL of the organization's website
+#   - name: founded
+#     type: string
+#     description: The year the organization was founded
+#   - name: employees
+#     type: string
+#     description: The approximate number of employees in the organization
+#   - name: locale
+#     type: string
+#     description: The locale of the organization
+#   - name: category
+#     type: string
+#     description: The category of the organization; possible values are `Adult`, `Email Provider`, `Education`, `SMS`, or `Other`
 # examples:
 #   - '"apple.com"'
 #   - '"stripe.com", "twitter_url, linkedin_url"'
 #   - '"fullcontact.com", "website, logo, founded, employees"'
-# notes: |
-#   The following properties are allowed:
-#     * `name`: the name of the organization (default)
-#     * `location`: the location or address of the organization
-#     * `twitter_url`: URL of the organization's Twitter profile
-#     * `linkedin_url`: URL of the organization's LinkedIn profile
-#     * `bio`: biography of the organization
-#     * `logo`: URL of the organization's logo
-#     * `website`: URL of the organization's website
-#     * `founded`: the year the organization was founded
-#     * `employees`: the approximate number of employees in the organization
-#     * `locale`: the locale of the organization
-#     * `category`: the category of the organization -- possible values are `Adult`, `Email Provider`, `Education`, `SMS`, or `Other`
 # ---
 
 import json
