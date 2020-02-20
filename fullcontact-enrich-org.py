@@ -46,7 +46,7 @@
 #     description: The locale of the organization
 #   - name: category
 #     type: string
-#     description: The category of the organization; possible values are `Adult`, `Email Provider`, `Education`, `SMS`, or `Other`
+#     description: The category of the organization; possible values are **Adult**, **Email Provider**, **Education**, **SMS**, or **Other**
 # examples:
 #   - '"apple.com"'
 #   - '"stripe.com", "twitter_url, linkedin_url"'
