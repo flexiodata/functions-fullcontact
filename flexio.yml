@@ -1,12 +1,38 @@
 title: FullContact
 description: Functions for accessing your FullContact info
+
 image:
   src: https://static.flex.io/assets/logos2/fullcontact.png
   alt: FullContact logo
+
 functions:
   - path: fullcontact-enrich-people.py
   - path: fullcontact-enrich-org.py
   - path: fullcontact-find-person.py
+
+templates:
+  - name: enrich-email-list
+    title: 'Enrich an email list with profile data'
+    description: 'Add profile and company data from FullContact to a list of email addresses'
+    gsheets_spreadsheet_id: ''
+    excel_spreadsheet_path: ''
+    in_production: false
+    in_staging: false
+  - name: lookup-data-for-people
+    title: 'Lookup data for people'
+    description: 'Lookup data for a list of people using their email address or LinkedIn profile'
+    gsheets_spreadsheet_id: ''
+    excel_spreadsheet_path: ''
+    in_production: false
+    in_staging: false
+  - name: lookup-data-for-companies
+    title: 'Lookup data for companies'
+    description: 'Lookup data for a list of companies using their website domain'
+    gsheets_spreadsheet_id: ''
+    excel_spreadsheet_path: ''
+    in_production: false
+    in_staging: false
+
 prompts:
   - element: form
     name: form_api_key
