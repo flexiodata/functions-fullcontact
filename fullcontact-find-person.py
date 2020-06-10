@@ -121,52 +121,46 @@ def flexio_handler(flex):
     if len(properties) == 1 and properties[0] == '*':
         properties = list(property_map.keys())
 
-    try:
+    # see here for more info:
+    # https://docs.fullcontact.com/#person-enrichment
+    # https://docs.fullcontact.com/#multi-field-request
 
-        # see here for more info:
-        # https://docs.fullcontact.com/#person-enrichment
-        # https://docs.fullcontact.com/#multi-field-request
+    email = input['email'].lower().strip()
+    profile = input['profile'].lower().strip()
 
-        email = input['email'].lower().strip()
-        profile = input['profile'].lower().strip()
+    data = {}
+    if len(email) > 0:
+        data['emails'] = [
+            input['email'].lower().strip()
+        ]
+    if len(profile) > 0:
+        data['profiles'] = [
+            {
+                "service": "linkedin",
+                "username": input['profile'].lower().strip()
+            }
+        ]
+    data = json.dumps(data)
 
-        data = {}
-        if len(email) > 0:
-            data['emails'] = [
-                input['email'].lower().strip()
-            ]
-        if len(profile) > 0:
-            data['profiles'] = [
-                {
-                    "service": "linkedin",
-                    "username": input['profile'].lower().strip()
-                }
-            ]
-        data = json.dumps(data)
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + auth_token
+    }
+    url = 'https://api.fullcontact.com/v3/person.enrich'
 
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + auth_token
-        }
-        url = 'https://api.fullcontact.com/v3/person.enrich'
+    # get the response data as a JSON object
+    response = requests_retry_session().post(url, data=data, headers=headers)
+    response.raise_for_status()
+    content = response.json()
 
-        # get the response data as a JSON object
-        response = requests_retry_session().post(url, data=data, headers=headers)
-        response.raise_for_status()
-        content = response.json()
+    # limit the results to the requested properties
+    properties = [content.get(property_map.get(p,''),'') or '' for p in properties]
+    result = [properties]
 
-        # limit the results to the requested properties
-        properties = [content.get(property_map.get(p,''),'') or '' for p in properties]
-        result = [properties]
-
-        # return the results
-        result = json.dumps(result, default=to_string)
-        flex.output.content_type = "application/json"
-        flex.output.write(result)
-
-    except:
-        flex.output.content_type = 'application/json'
-        flex.output.write([['']])
+    # return the results
+    result = json.dumps(result, default=to_string)
+    flex.output.content_type = "application/json"
+    flex.output.write(result)
 
 def requests_retry_session(
     retries=3,

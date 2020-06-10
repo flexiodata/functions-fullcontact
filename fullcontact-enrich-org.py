@@ -116,37 +116,31 @@ def flexio_handler(flex):
     if len(properties) == 1 and properties[0] == '*':
         properties = list(property_map.keys())
 
-    try:
+    # see here for more info:
+    # https://docs.fullcontact.com/#company-enrichment
 
-        # see here for more info:
-        # https://docs.fullcontact.com/#company-enrichment
+    data = json.dumps({
+        'domain': input['domain'].lower().strip()
+    })
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + auth_token
+    }
+    url = 'https://api.fullcontact.com/v3/company.enrich'
 
-        data = json.dumps({
-            'domain': input['domain'].lower().strip()
-        })
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + auth_token
-        }
-        url = 'https://api.fullcontact.com/v3/company.enrich'
+    # get the response data as a JSON object
+    response = requests_retry_session().post(url, data=data, headers=headers)
+    response.raise_for_status()
+    content = response.json()
 
-        # get the response data as a JSON object
-        response = requests_retry_session().post(url, data=data, headers=headers)
-        response.raise_for_status()
-        content = response.json()
+    # limit the results to the requested properties
+    properties = [content.get(property_map.get(p,''),'') or '' for p in properties]
+    result = [properties]
 
-        # limit the results to the requested properties
-        properties = [content.get(property_map.get(p,''),'') or '' for p in properties]
-        result = [properties]
-
-        # return the results
-        result = json.dumps(result, default=to_string)
-        flex.output.content_type = "application/json"
-        flex.output.write(result)
-
-    except:
-        flex.output.content_type = 'application/json'
-        flex.output.write([['']])
+    # return the results
+    result = json.dumps(result, default=to_string)
+    flex.output.content_type = "application/json"
+    flex.output.write(result)
 
 def requests_retry_session(
     retries=3,
