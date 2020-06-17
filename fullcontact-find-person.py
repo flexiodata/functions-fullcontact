@@ -122,6 +122,7 @@ def flexio_handler(flex):
     # see here for more info:
     # https://docs.fullcontact.com/#person-enrichment
     # https://docs.fullcontact.com/#multi-field-request
+    # https://dashboard.fullcontact.com/api-ref#response-codes-&-errors
 
     email = input['email'].lower().strip()
     profile = input['profile'].lower().strip()
@@ -148,8 +149,26 @@ def flexio_handler(flex):
 
     # get the response data as a JSON object
     response = requests_retry_session().post(url, data=data, headers=headers)
-    response.raise_for_status()
     content = response.json()
+
+    # sometimes results are pending; for these, return text indicating
+    # the result is pending so the user can refresh later to look for
+    # the completed result
+    status_code = response.status_code
+    if status_code == 202:
+        flex.output.content_type = "application/json"
+        flex.output.write([['Result Pending...']])
+        return
+
+    # if a result can't be found or wasn't formatted properly,
+    # return a blank (equivalent to not finding a bad email address)
+    if status_code == 400 or status_code == 404 or status_code == 422:
+        flex.output.content_type = "application/json"
+        flex.output.write([['']])
+        return
+
+    # return an error for any other non-200 result
+    response.raise_for_status()
 
     # limit the results to the requested properties
     properties = [content.get(property_map.get(p,''),'') or '' for p in properties]
