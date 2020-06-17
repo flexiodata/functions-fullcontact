@@ -136,7 +136,7 @@ def flexio_handler(flex):
     status_code = response.status_code
     if status_code == 202:
         flex.output.content_type = "application/json"
-        flex.output.write([['pending']])
+        flex.output.write([['Result Pending...']])
         return
 
     # if a result can't be found or wasn't formatted properly,
